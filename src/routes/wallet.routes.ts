@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { createWallet } from '../controllers/wallet.controller';
+import { createWallet, getBalance } from '../controllers/wallet.controller';
 
 const router = Router();
 router.post('/create-wallet', createWallet);
+router.get('/balance/:phone', getBalance);
 export default router;

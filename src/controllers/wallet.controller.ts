@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { ZcashService } from '../wallet/zcash.service';
 
-// Temporary in-memory storage (until MongoDB is connected)
 const users: { phone: string; wallet: string; balance: number }[] = [];
 
 export const createWallet = async (req: Request, res: Response): Promise<void> => {
@@ -27,6 +26,26 @@ export const createWallet = async (req: Request, res: Response): Promise<void> =
 
   } catch (error) {
     console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+export const getBalance = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { phone } = req.params;
+    const user = users.find(u => u.phone === phone);
+
+    if (!user) {
+      res.status(404).json({ error: 'User not found' });
+      return;
+    }
+
+    res.json({
+      wallet: user.wallet,
+      balance: user.balance.toFixed(4) + ' ZEC',
+    });
+
+  } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
 };
