@@ -48,3 +48,27 @@ export const sendMoney = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+const redeemCodes: { code: string; amount: number; used: boolean }[] = [
+  { code: '483838292929', amount: 0.4, used: false },
+  { code: '111222333444', amount: 1.0, used: false },
+  { code: '999888777666', amount: 2.5, used: false },
+];
+
+export const redeemCard = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { phone, code } = req.body;
+    if (!phone || !code) { res.status(400).json({ error: 'phone and code are required' }); return; }
+    const user = users.find(u => u.phone === phone);
+    if (!user) { res.status(404).json({ error: 'User not found' }); return; }
+    const card = redeemCodes.find(c => c.code === code && !c.used);
+    if (!card) { res.status(404).json({ error: 'Invalid or already used code' }); return; }
+    card.used = true;
+    user.balance += card.amount;
+    res.json({
+      credited: card.amount.toFixed(1) + ' ZEC',
+      newBalance: user.balance.toFixed(4) + ' ZEC',
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
