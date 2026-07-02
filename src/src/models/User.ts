@@ -1,0 +1,17 @@
+import mongoose, { Schema, Document } from 'mongoose';
+
+export interface IUser extends Document {
+  phone: string;
+  wallet: string;
+  balance: number;
+  createdAt: Date;
+}
+
+const UserSchema = new Schema<IUser>({
+  phone:     { type: String, required: true, unique: true },
+  wallet:    { type: String, required: true, unique: true },
+  balance:   { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now },
+});
+
+export const UserModel = mongoose.model<IUser>('User', UserSchema);

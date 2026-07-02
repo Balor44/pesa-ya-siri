@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from 'express';
 import cors from 'cors';
+import walletRoutes from './routes/wallet.routes';
 
 const app = express();
 
@@ -15,5 +16,7 @@ app.get('/health', (_req: any, res: any) => {
     version: '1.0.0',
   });
 });
+
+app.use('/api', walletRoutes);
 
 export default app;
