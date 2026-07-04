@@ -104,7 +104,7 @@ curl -X POST YOUR-RAILWAY-URL/api/message \
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR-USERNAME/pesa-ya-siri.git
+git clone https://github.com/clemencedouglas/pesa-ya-siri.git
 cd pesa-ya-siri
 
 # Install dependencies
