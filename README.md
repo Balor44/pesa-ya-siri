@@ -1,8 +1,9 @@
 # 🔐 Pesa Ya Siri
 > Private ZCash payments over WhatsApp — built for Tanzania and East Africa
-
-[![Live API](https://img.shields.io/badge/API-Live-brightgreen)](YOUR-RAILWAY-URL/health)
-[![GitHub](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+[![Live API](https://img.shields.io/badge/API-Live-brightgreen)](https://web-production-fe8ba0.up.railway.app/health)
+[![MongoDB](https://img.shields.io/badge/Database-Connected-brightgreen)](https://railway.app)
+[![Railway](https://img.shields.io/badge/Hosted%20on-Railway-blueviolet)](https://railway.app/project/https://railway.com/project/de94aa09-327e-4dcd-93cb-c562280ebea7/service/959a3dc6-9f19-4a0e-aad4-828b66644514?environmentId=91474f45-8624-49ca-aa88-5007a6039ca7&id=bb6d7d40-7372-49dd-a610-4b8ae5633dc3#deploy)
+[![License](https://img.shields.io/badge/License-MIT-blue)](#)
 [![ZCash](https://img.shields.io/badge/Powered%20by-ZCash-F4B728)](https://z.cash)
 
 ---
