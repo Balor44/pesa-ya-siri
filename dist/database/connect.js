@@ -7,13 +7,12 @@ exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = async () => {
     try {
-        // Railway injects MONGO_URL automatically when MongoDB plugin is added
         const uri = process.env.MONGO_URL || process.env.MONGODB_URI;
         if (!uri) {
             console.log('⚠️  No database URI found — running without database');
             return;
         }
-        await mongoose_1.default.connect(uri + '?authSource=admin');
+        await mongoose_1.default.connect(uri, { dbName: 'pesayasiri' });
         console.log('✅ MongoDB connected');
     }
     catch (error) {
