@@ -5,16 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
+const RAILWAY_MONGO = 'mongodb://mongo:SKBckMpRPeXWIoWcvEjLqIPrmOFWrCAo@mongodb.railway.internal:27017/pesayasiri';
 const connectDB = async () => {
     try {
-        console.log('ALL ENV KEYS:', Object.keys(process.env).join(', '));
-        const uri = process.env.DATABASE_URL || process.env.MONGO_URL;
-        if (!uri) {
-            console.log('⚠️  No database URI found — running without database');
-            return;
-        }
-        await mongoose_1.default.connect(uri + '/pesayasiri');
-        console.log('✅ MongoDB connected');
+        const uri = process.env.DATABASE_URL ||
+            process.env.MONGO_URL ||
+            process.env.MONGODB_URI ||
+            RAILWAY_MONGO;
+        await mongoose_1.default.connect(uri);
+        console.log('✅ MongoDB connected to:', uri.split('@')[1]);
     }
     catch (error) {
         console.error('❌ MongoDB failed to connect:', error);
