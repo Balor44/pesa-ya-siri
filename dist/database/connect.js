@@ -12,7 +12,9 @@ const connectDB = async () => {
             console.log('⚠️  No database URI found — running without database');
             return;
         }
-        await mongoose_1.default.connect(uri, { dbName: 'pesayasiri' });
+        // Add database name to URI directly
+        const uriWithDb = uri.replace('mongodb://', 'mongodb://').replace(':27017', ':27017/pesayasiri');
+        await mongoose_1.default.connect(uriWithDb);
         console.log('✅ MongoDB connected');
     }
     catch (error) {
