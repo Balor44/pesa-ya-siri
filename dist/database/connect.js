@@ -7,14 +7,12 @@ exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = async () => {
     try {
-        const uri = process.env.MONGO_URL || process.env.MONGODB_URI;
+        const uri = process.env.MONGO_URL;
         if (!uri) {
             console.log('⚠️  No database URI found — running without database');
             return;
         }
-        // Add database name to URI directly
-        const uriWithDb = uri.replace('mongodb://', 'mongodb://').replace(':27017', ':27017/pesayasiri');
-        await mongoose_1.default.connect(uriWithDb);
+        await mongoose_1.default.connect(uri + '/pesayasiri');
         console.log('✅ MongoDB connected');
     }
     catch (error) {
