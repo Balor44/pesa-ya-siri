@@ -92,22 +92,15 @@ curl -X POST https://web-production-fe8ba0.up.railway.app//api/message \
 ---
 
 ## Run Locally
-# Clone the repo
+
+Clone the repo, install dependencies, and start the server:
+
+```bash
 git clone https://github.com/clemencedouglas/pesa-ya-siri.git
 cd pesa-ya-siri
-
-# Install dependencies
 npm install
-
-# Create your environment file
-cp .env.example .env
-# mongodb.railway.internal:27017/pesayasiri?authSource=admin
-
-# Start the development server
 npm run dev
-
-# Server runs at http://localhost:3000
-# Test: http://localhost:3000/health
+Server runs at http://localhost:3000
 
 ---
 
