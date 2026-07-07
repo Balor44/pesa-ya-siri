@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 export const connectDB = async (): Promise<void> => {
   try {
+    console.log('ENV CHECK - MONGO_URL:', process.env.MONGO_URL ? 'EXISTS' : 'MISSING');
+    console.log('ENV CHECK - NODE_ENV:', process.env.NODE_ENV);
     const uri = process.env.MONGO_URL;
     if (!uri) {
       console.log('⚠️  No database URI found — running without database');

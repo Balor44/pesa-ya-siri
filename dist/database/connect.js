@@ -7,6 +7,8 @@ exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = async () => {
     try {
+        console.log('ENV CHECK - MONGO_URL:', process.env.MONGO_URL ? 'EXISTS' : 'MISSING');
+        console.log('ENV CHECK - NODE_ENV:', process.env.NODE_ENV);
         const uri = process.env.MONGO_URL;
         if (!uri) {
             console.log('⚠️  No database URI found — running without database');
