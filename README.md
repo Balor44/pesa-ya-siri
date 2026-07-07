@@ -66,14 +66,14 @@ HELP                — Show all commands
 
 ## Live Demo
 
-Base URL: YOUR-RAILWAY-URL
+Base URL: https://web-production-fe8ba0.up.railway.app/
 
 Test it right now with curl:
 # Check the server is running
-curl YOUR-RAILWAY-URL/health
+curl https://web-production-fe8ba0.up.railway.app//health
 
 # Simulate a WhatsApp message
-curl -X POST YOUR-RAILWAY-URL/api/message \
+curl -X POST https://web-production-fe8ba0.up.railway.app//api/message \
   -H "Content-Type: application/json" \
   -d '{"phone":"0712345678","message":"HELP"}'
 
@@ -92,7 +92,7 @@ curl -X POST YOUR-RAILWAY-URL/api/message \
 
 ## Run Locally
 # Clone the repo
-git clone https://github.com/YOUR-USERNAME/pesa-ya-siri.git
+git clone https://github.com/clemencedouglas/pesa-ya-siri.git
 cd pesa-ya-siri
 
 # Install dependencies
@@ -100,7 +100,7 @@ npm install
 
 # Create your environment file
 cp .env.example .env
-# Fill in your MONGODB_URI and other values
+# mongodb.railway.internal:27017/pesayasiri?authSource=admin
 
 # Start the development server
 npm run dev
@@ -134,7 +134,7 @@ pesa-ya-siri/
 
 Create a .env file based on .env.example:
 PORT=3000
-MONGODB_URI=your_mongodb_atlas_connection_string
+MONGODB_URI=mongodb.railway.internal:27017/pesayasiri?authSource=admin
 NODE_ENV=development
 
 ---
