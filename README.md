@@ -113,19 +113,19 @@ npm run dev
 ## Project Structure
 pesa-ya-siri/
 ├── src/
-│   ├── controllers/     — request handlers for each endpoint
-│   ├── routes/          — URL path definitions
-│   ├── services/        — chatbot engine and business logic
-│   ├── models/          — MongoDB schemas (User, Transaction, RechargeCard)
-│   ├── middleware/       — auth, error handling
-│   ├── utils/           — helper functions
-│   ├── wallet/          — ZCash service (lightwalletd integration)
-│   ├── database/        — MongoDB connection
-│   ├── app.ts           — Express app setup
-│   └── server.ts        — entry point
-├── dist/                — compiled JavaScript (auto-generated)
-├── .env.example         — environment variable template
-├── railway.json         — Railway deployment config
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   ├── models/
+│   ├── middleware/
+│   ├── utils/
+│   ├── wallet/
+│   ├── database/
+│   ├── app.ts
+│   └── server.ts
+├── dist/
+├── .env.example
+├── railway.json
 └── README.md
 
 ---
