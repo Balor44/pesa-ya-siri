@@ -9,19 +9,26 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const path_1 = __importDefault(require("path"));
 const wallet_routes_1 = __importDefault(require("./routes/wallet.routes"));
+const transaction_routes_1 = __importDefault(require("./routes/transaction.routes"));
+const redeem_routes_1 = __importDefault(require("./routes/redeem.routes"));
 const message_routes_1 = __importDefault(require("./routes/message.routes"));
 const admin_routes_1 = __importDefault(require("./routes/admin.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.get('/health', (_req, res) => {
-    res.json({
-        status: 'Pesa Ya Siri is running',
-        version: '1.0.0',
-    });
-});
 app.use('/api', wallet_routes_1.default);
+app.use('/api', transaction_routes_1.default);
+app.use('/api', redeem_routes_1.default);
 app.use('/api', message_routes_1.default);
 app.use('/api', admin_routes_1.default);
+app.get('/health', (_req, res) => {
+    res.json({ status: 'OK', product: 'Pesa Ya Siri' });
+});
+// Serve the React frontend
+app.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
+app.get('/{*path}', (_req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '../public', 'index.html'));
+});
 exports.default = app;
