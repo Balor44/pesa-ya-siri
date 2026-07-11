@@ -15,6 +15,7 @@ const transaction_routes_1 = __importDefault(require("./routes/transaction.route
 const redeem_routes_1 = __importDefault(require("./routes/redeem.routes"));
 const message_routes_1 = __importDefault(require("./routes/message.routes"));
 const admin_routes_1 = __importDefault(require("./routes/admin.routes"));
+const waitlist_routes_1 = __importDefault(require("./routes/waitlist.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
@@ -23,6 +24,7 @@ app.use('/api', transaction_routes_1.default);
 app.use('/api', redeem_routes_1.default);
 app.use('/api', message_routes_1.default);
 app.use('/api', admin_routes_1.default);
+app.use('/api', waitlist_routes_1.default);
 app.get('/health', (_req, res) => {
     res.json({ status: 'OK', product: 'Pesa Ya Siri' });
 });

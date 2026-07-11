@@ -205,9 +205,9 @@ export default function PesaYaSiriLanding() {
             <a key={n.label} href={n.href} target={n.href.startsWith("http") ? "_blank" : "_self"} rel="noreferrer" style={{ color: MUTED, fontSize: 12, textDecoration: "none" }}>{n.label}</a>
           ))}
           <a href={GITHUB} target="_blank" rel="noreferrer" style={{ color: MUTED }}><GITHUB_ICON /></a>
-          <button onClick={() => setPilotClicked(true)} style={{ background: GOLD, color: "#000", borderRadius: 7, padding: "6px 14px", fontSize: 12, fontWeight: 600, border: "none", cursor: "pointer" }}>
-            {pilotClicked ? "Coming Soon!" : "Join Pilot"}
-          </button>
+          <button onClick={() => window.location.href = '/waitlist'} style={{ background: GOLD, color: "#000", borderRadius: 7, padding: "6px 14px", fontSize: 12, fontWeight: 600, border: "none", cursor: "pointer" }}>
+  Join Pilot
+</button>
         </div>
         <button className="nav-mobile-btn" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", background: "none", border: "none", color: TEXT, cursor: "pointer", fontSize: 22, padding: 4 }}>
           {menuOpen ? "✕" : "☰"}
@@ -222,9 +222,9 @@ export default function PesaYaSiriLanding() {
           ))}
           <div style={{ display: "flex", gap: 10, marginTop: 14 }}>
             <a href={GITHUB} target="_blank" rel="noreferrer" style={{ color: MUTED }}><GITHUB_ICON /></a>
-            <button onClick={() => { setPilotClicked(true); setMenuOpen(false); }} style={{ background: GOLD, color: "#000", borderRadius: 7, padding: "7px 16px", fontSize: 13, fontWeight: 600, border: "none", cursor: "pointer" }}>
-              {pilotClicked ? "Coming Soon!" : "Join Pilot"}
-            </button>
+            <button onClick={() => window.location.href = '/waitlist'} style={{ background: GOLD, color: "#000", borderRadius: 7, padding: "6px 14px", fontSize: 12, fontWeight: 600, border: "none", cursor: "pointer" }}>
+  Join Pilot
+</button>
           </div>
         </div>
       )}
@@ -244,7 +244,7 @@ export default function PesaYaSiriLanding() {
             Buy ZEC, send money, and buy airtime — all through WhatsApp. No apps. No complexity. Just private money that works.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <button onClick={() => alert("Pilot launching soon in Dar es Salaam. Stay tuned!")} style={{ background: GOLD, color: "#000", borderRadius: 10, padding: "11px 22px", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>
+            <button onClick={() => window.location.href = '/waitlist'} style={{ background: GOLD, color: "#000", borderRadius: 10, padding: "11px 22px", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>
               Join the Pilot
             </button>
             <a href={GITHUB} target="_blank" rel="noreferrer" style={{ background: "transparent", color: TEXT, border: "1px solid " + BORDER, borderRadius: 10, padding: "11px 20px", fontSize: 13, fontWeight: 600, textDecoration: "none", display: "flex", alignItems: "center", gap: 7 }}>

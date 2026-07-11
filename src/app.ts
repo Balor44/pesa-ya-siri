@@ -11,6 +11,7 @@ import transactionRoutes from './routes/transaction.routes';
 import redeemRoutes from './routes/redeem.routes';
 import messageRoutes from './routes/message.routes';
 import adminRoutes from './routes/admin.routes';
+import waitlistRoutes from './routes/waitlist.routes'
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use('/api', transactionRoutes);
 app.use('/api', redeemRoutes);
 app.use('/api', messageRoutes);
 app.use('/api', adminRoutes);
+app.use('/api', waitlistRoutes);
 
 app.get('/health', (_req: any, res: any) => {
   res.json({ status: 'OK', product: 'Pesa Ya Siri' });
