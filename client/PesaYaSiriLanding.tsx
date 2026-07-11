@@ -7,13 +7,7 @@ const CARD = "#111811";
 const BORDER = "#1E2E1E";
 const TEXT = "#E8F0E8";
 const MUTED = "#6B7F6B";
-
-const ZEC_ICON = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <circle cx="12" cy="12" r="12" fill={GOLD} />
-    <text x="12" y="17" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#000">Z</text>
-  </svg>
-);
+const GITHUB = "https://github.com/clemencedouglas/pesa-ya-siri";
 
 const WA_ICON = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill={GREEN}>
@@ -40,38 +34,39 @@ const USERS_ICON = () => (
   </svg>
 );
 
-const GLOBE_ICON = () => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="1.5">
-    <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-  </svg>
-);
-
 const CHAT_MESSAGES = [
   { from: "user", text: "CREATE", time: "9:41 AM" },
-  { from: "bot", text: "✅ Wallet created successfully.\nYour shielded address:\nzs1q9x...8m7f\n\nBalance: 0.0000 ZEC", time: "9:41 AM" },
+  { from: "bot", text: "Wallet created successfully.\nYour shielded address:\nzs1q9x...8m7f\n\nBalance: 0.0000 ZEC", time: "9:41 AM" },
   { from: "user", text: "BALANCE", time: "9:41 AM" },
-  { from: "bot", text: "💰 Your Balance\n0.5304 ZEC\n≈ 26,520 TZS", time: "9:41 AM" },
+  { from: "bot", text: "Your Balance\n0.5304 ZEC\n26,520 TZS", time: "9:41 AM" },
   { from: "user", text: "SEND 0712345678 0.2", time: "9:42 AM" },
-  { from: "bot", text: "✅ Transaction complete.\n0.2000 ZEC sent successfully\nto 0712345678.\nShielded. Private. Secure.", time: "9:42 AM" },
+  { from: "bot", text: "Transaction complete.\n0.2000 ZEC sent to 0712345678.\nShielded. Private. Secure.", time: "9:42 AM" },
   { from: "user", text: "BUY AIRTIME", time: "9:43 AM" },
-  { from: "bot", text: "📱 Airtime Purchase\nPhone: 0712••••••\nAmount: 5,000 TZS\n✅ Airtime delivered.", time: "9:43 AM" },
+  { from: "bot", text: "Airtime Purchase\nPhone: 0712\nAmount: 5,000 TZS\nAirtime delivered.", time: "9:43 AM" },
 ];
 
 const DEMO_RESPONSES = {
-  "HELP": "👋 Karibu! Here are the commands you can use:\nCREATE    — Create a new wallet\nBALANCE   — Check your balance\nSEND [phone] [amt] — Send ZEC\nREDEEM [code] — Redeem voucher\nBUY AIRTIME — Buy mobile airtime\nHELP      — Show this menu",
-  "CREATE": "✅ Wallet created successfully!\nYour shielded address:\nzs1q9x...8m7f\n\nBalance: 0.0000 ZEC\n\nYou can now receive ZEC from anyone.",
-  "BALANCE": "💰 Your Balance\n\n0.5304 ZEC\n≈ 26,520 TZS\n\nWallet: zs1q9x...8m7f",
-  "SEND 0712345678 0.2": "✅ Transaction complete.\n0.2000 ZEC sent successfully\nto 0712345678.\n\nShielded. Private. Secure.\nNew balance: 0.3304 ZEC",
-  "REDEEM A1B2C3D4": "✅ Voucher redeemed!\n\n0.4000 ZEC credited.\nNew balance: 0.9304 ZEC\n\nThank you for using Pesa Ya Siri.",
-  "BUY AIRTIME": "📱 Airtime Purchase\n\nPhone: 0712••••••\nAmount: 5,000 TZS\n\n✅ Airtime delivered successfully.",
+  "HELP": "Karibu! Commands you can use:\nCREATE    - Create a new wallet\nBALANCE   - Check your balance\nSEND [phone] [amt] - Send ZEC\nREDEEM [code] - Redeem voucher\nBUY AIRTIME - Buy mobile airtime\nHELP      - Show this menu",
+  "CREATE": "Wallet created successfully!\nYour shielded address:\nzs1q9x...8m7f\n\nBalance: 0.0000 ZEC\n\nYou can now receive ZEC from anyone.",
+  "BALANCE": "Your Balance\n\n0.5304 ZEC\n26,520 TZS\n\nWallet: zs1q9x...8m7f",
+  "SEND 0712345678 0.2": "Transaction complete.\n0.2000 ZEC sent to 0712345678.\n\nShielded. Private. Secure.\nNew balance: 0.3304 ZEC",
+  "REDEEM A1B2C3D4": "Voucher redeemed!\n\n0.4000 ZEC credited.\nNew balance: 0.9304 ZEC\n\nThank you for using Pesa Ya Siri.",
+  "BUY AIRTIME": "Airtime Purchase\n\nPhone: 0712\nAmount: 5,000 TZS\n\nAirtime delivered successfully.",
 };
+
+const NAV_LINKS = [
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Features", href: "#features" },
+  { label: "Roadmap", href: "#roadmap" },
+  { label: "Docs", href: GITHUB + "#readme" },
+  { label: "FAQ", href: "#faq" },
+];
 
 function WhatsAppMockup({ activeMsg }) {
   return (
-    <div style={{ width: 260, background: "#111", borderRadius: 32, padding: "12px 6px", boxShadow: "0 40px 80px rgba(0,0,0,0.6)", border: "1px solid #222", position: "relative" }}>
+    <div style={{ width: 260, background: "#111", borderRadius: 32, padding: "12px 6px", boxShadow: "0 40px 80px rgba(0,0,0,0.6)", border: "1px solid #222" }}>
       <div style={{ background: "#1A2C1A", borderRadius: "24px 24px 0 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: 8 }}>
-        <div style={{ width: 32, height: 32, borderRadius: "50%", background: `linear-gradient(135deg, ${GOLD}, #F4C842)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 800 }}>P</div>
+        <div style={{ width: 32, height: 32, borderRadius: "50%", background: "linear-gradient(135deg, #F4A800, #F4C842)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 800 }}>P</div>
         <div>
           <div style={{ color: TEXT, fontSize: 13, fontWeight: 600 }}>Pesa Ya Siri</div>
           <div style={{ color: GREEN, fontSize: 10 }}>online</div>
@@ -84,7 +79,7 @@ function WhatsAppMockup({ activeMsg }) {
               background: msg.from === "user" ? "#1A3A2A" : "#1E2E1E",
               borderRadius: msg.from === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
               padding: "6px 10px", maxWidth: "80%",
-              border: msg.from === "bot" ? `1px solid ${BORDER}` : "none"
+              border: msg.from === "bot" ? "1px solid " + BORDER : "none"
             }}>
               <div style={{ color: TEXT, fontSize: 11, lineHeight: 1.5, whiteSpace: "pre-line" }}>{msg.text}</div>
               <div style={{ color: MUTED, fontSize: 9, textAlign: "right", marginTop: 2 }}>{msg.time}</div>
@@ -105,7 +100,7 @@ function WhatsAppMockup({ activeMsg }) {
 function LiveDemo() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
-    { from: "bot", text: "👋 Karibu! Here are the commands you can use:\nCREATE    — Create a new wallet\nBALANCE   — Check your balance\nSEND [phone] [amt] — Send ZEC\nREDEEM [code] — Redeem voucher\nBUY AIRTIME — Buy mobile airtime\nHELP      — Show this menu", time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }
+    { from: "bot", text: "Karibu! Commands:\nCREATE - Create wallet\nBALANCE - Check balance\nSEND [phone] [amt] - Send ZEC\nREDEEM [code] - Redeem voucher\nBUY AIRTIME - Buy airtime\nHELP - Show this menu", time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }
   ]);
   const bottomRef = useRef(null);
 
@@ -124,18 +119,18 @@ function LiveDemo() {
   const QUICK = ["HELP", "CREATE", "BALANCE", "SEND 0712345678 0.2", "REDEEM A1B2C3D4", "BUY AIRTIME"];
 
   return (
-    <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, overflow: "hidden", maxWidth: 560 }}>
+    <div style={{ background: CARD, border: "1px solid " + BORDER, borderRadius: 16, overflow: "hidden", maxWidth: 560 }}>
       <div style={{ background: "#1A2C1A", padding: "12px 16px", display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{ width: 36, height: 36, borderRadius: "50%", background: `linear-gradient(135deg, ${GOLD}, #F4C842)`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 16 }}>P</div>
+        <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg, #F4A800, #F4C842)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 16 }}>P</div>
         <div>
           <div style={{ color: TEXT, fontWeight: 600, fontSize: 14 }}>Pesa Ya Siri</div>
-          <div style={{ color: GREEN, fontSize: 11 }}>● online</div>
+          <div style={{ color: GREEN, fontSize: 11 }}>online</div>
         </div>
       </div>
       <div style={{ height: 280, overflowY: "auto", padding: "12px 14px", display: "flex", flexDirection: "column", gap: 8, background: "#0B140B" }}>
         {messages.map((m, i) => (
           <div key={i} style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start" }}>
-            <div style={{ background: m.from === "user" ? "#1A3A2A" : "#1E2E1E", borderRadius: m.from === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px", padding: "8px 12px", maxWidth: "75%", border: m.from === "bot" ? `1px solid ${BORDER}` : "none" }}>
+            <div style={{ background: m.from === "user" ? "#1A3A2A" : "#1E2E1E", borderRadius: m.from === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px", padding: "8px 12px", maxWidth: "75%", border: m.from === "bot" ? "1px solid " + BORDER : "none" }}>
               <div style={{ color: TEXT, fontSize: 12, lineHeight: 1.6, whiteSpace: "pre-line" }}>{m.text}</div>
               <div style={{ color: MUTED, fontSize: 10, textAlign: "right", marginTop: 3 }}>{m.time}</div>
             </div>
@@ -143,13 +138,13 @@ function LiveDemo() {
         ))}
         <div ref={bottomRef} />
       </div>
-      <div style={{ padding: "8px 14px", display: "flex", flexWrap: "wrap", gap: 6, borderTop: `1px solid ${BORDER}` }}>
+      <div style={{ padding: "8px 14px", display: "flex", flexWrap: "wrap", gap: 6, borderTop: "1px solid " + BORDER }}>
         {QUICK.map(q => (
-          <button key={q} onClick={() => { setInput(q); }} style={{ background: "#1A2C1A", border: `1px solid ${BORDER}`, color: GREEN, borderRadius: 20, padding: "3px 10px", fontSize: 11, cursor: "pointer" }}>{q}</button>
+          <button key={q} onClick={() => setInput(q)} style={{ background: "#1A2C1A", border: "1px solid " + BORDER, color: GREEN, borderRadius: 20, padding: "3px 10px", fontSize: 11, cursor: "pointer" }}>{q}</button>
         ))}
       </div>
-      <div style={{ padding: "10px 14px", display: "flex", gap: 8, borderTop: `1px solid ${BORDER}` }}>
-        <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} placeholder="Type a command..." style={{ flex: 1, background: "#0B140B", border: `1px solid ${BORDER}`, borderRadius: 20, padding: "8px 14px", color: TEXT, fontSize: 13, outline: "none" }} />
+      <div style={{ padding: "10px 14px", display: "flex", gap: 8, borderTop: "1px solid " + BORDER }}>
+        <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} placeholder="Type a command..." style={{ flex: 1, background: "#0B140B", border: "1px solid " + BORDER, borderRadius: 20, padding: "8px 14px", color: TEXT, fontSize: 13, outline: "none" }} />
         <button onClick={send} style={{ width: 36, height: 36, borderRadius: "50%", background: GREEN, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
         </button>
@@ -160,7 +155,7 @@ function LiveDemo() {
 
 export default function PesaYaSiriLanding() {
   const [activeMsg, setActiveMsg] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [pilotClicked, setPilotClicked] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -169,31 +164,36 @@ export default function PesaYaSiriLanding() {
     return () => clearInterval(interval);
   }, []);
 
-  const NAV = ["How It Works", "Features", "Roadmap", "Docs", "FAQ"];
-
   return (
     <div style={{ background: DARK, color: TEXT, fontFamily: "'Inter', system-ui, sans-serif", minHeight: "100vh" }}>
 
       {/* NAV */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(10,15,10,0.95)", backdropFilter: "blur(12px)", borderBottom: `1px solid ${BORDER}`, padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 56 }}>
+      <nav style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(10,15,10,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid " + BORDER, padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 56 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg, ${GOLD}, #F4C842)`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 14, color: "#000" }}>P</div>
+          <div style={{ width: 28, height: 28, borderRadius: 8, background: "linear-gradient(135deg, #F4A800, #F4C842)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 14, color: "#000" }}>P</div>
           <div>
             <div style={{ fontWeight: 700, fontSize: 14, color: TEXT }}>PESA YA SIRI</div>
             <div style={{ fontSize: 9, color: MUTED, letterSpacing: "0.1em" }}>Private by default.</div>
           </div>
         </div>
         <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-          {NAV.map(n => <a key={n} href={`#${n.toLowerCase().replace(/ /g, "-")}`} style={{ color: MUTED, fontSize: 13, textDecoration: "none" }}>{n}</a>)}
-          <a href="https://github.com/clemencedouglas/pesa-ya-siri" target="_blank" rel="noreferrer" style={{ color: MUTED }}><GITHUB_ICON /></a>
-          <a href="#demo" style={{ background: GOLD, color: "#000", borderRadius: 8, padding: "7px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>Join Pilot</a>
+          {NAV_LINKS.map(n => (
+            <a key={n.label} href={n.href} target={n.href.startsWith("http") ? "_blank" : "_self"} rel="noreferrer" style={{ color: MUTED, fontSize: 13, textDecoration: "none" }}>{n.label}</a>
+          ))}
+          <a href={GITHUB} target="_blank" rel="noreferrer" style={{ color: MUTED }}><GITHUB_ICON /></a>
+          <button
+            onClick={() => setPilotClicked(true)}
+            style={{ background: GOLD, color: "#000", borderRadius: 8, padding: "7px 16px", fontSize: 13, fontWeight: 600, border: "none", cursor: "pointer" }}
+          >
+            {pilotClicked ? "Coming Soon!" : "Join Pilot"}
+          </button>
         </div>
       </nav>
 
       {/* HERO */}
       <section style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 32px 60px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
         <div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1A2C1A", border: `1px solid ${GREEN}33`, borderRadius: 20, padding: "4px 12px", fontSize: 11, color: GREEN, marginBottom: 24 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1A2C1A", border: "1px solid " + GREEN + "33", borderRadius: 20, padding: "4px 12px", fontSize: 11, color: GREEN, marginBottom: 24 }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: GREEN, display: "inline-block" }} />
             WhatsApp-native ZCash Wallet for Tanzania
           </div>
@@ -205,10 +205,13 @@ export default function PesaYaSiriLanding() {
             Buy ZEC, send money, and buy airtime — all through WhatsApp. No apps. No complexity. Just private money that works.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="#demo" style={{ background: GOLD, color: "#000", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>
-              Join the Pilot →
-            </a>
-            <a href="https://github.com/clemencedouglas/pesa-ya-siri" target="_blank" rel="noreferrer" style={{ background: "transparent", color: TEXT, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 600, textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>
+            <button
+              onClick={() => alert("Pilot launching soon in Dar es Salaam. Stay tuned!")}
+              style={{ background: GOLD, color: "#000", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}
+            >
+              Join the Pilot
+            </button>
+            <a href={GITHUB} target="_blank" rel="noreferrer" style={{ background: "transparent", color: TEXT, border: "1px solid " + BORDER, borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 600, textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>
               <GITHUB_ICON /> View on GitHub
             </a>
           </div>
@@ -226,8 +229,8 @@ export default function PesaYaSiriLanding() {
         </div>
       </section>
 
-      {/* WHY */}
-      <section style={{ background: CARD, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`, padding: "60px 32px" }}>
+      {/* FEATURES */}
+      <section id="features" style={{ background: CARD, borderTop: "1px solid " + BORDER, borderBottom: "1px solid " + BORDER, padding: "60px 32px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <h2 style={{ textAlign: "center", fontSize: 28, fontWeight: 700, marginBottom: 40 }}>Why Pesa Ya Siri?</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
@@ -236,7 +239,7 @@ export default function PesaYaSiriLanding() {
               { icon: <WA_ICON />, title: "Familiar", desc: "Works entirely through WhatsApp — the app you already know and trust." },
               { icon: <USERS_ICON />, title: "Accessible", desc: "No app installation. No seed phrases. No technical knowledge. Just start." },
             ].map((f, i) => (
-              <div key={i} style={{ background: DARK, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "28px 24px" }}>
+              <div key={i} style={{ background: DARK, border: "1px solid " + BORDER, borderRadius: 14, padding: "28px 24px" }}>
                 <div style={{ marginBottom: 14 }}>{f.icon}</div>
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{f.title}</div>
                 <div style={{ color: MUTED, fontSize: 13, lineHeight: 1.6 }}>{f.desc}</div>
@@ -252,15 +255,14 @@ export default function PesaYaSiriLanding() {
         <p style={{ textAlign: "center", color: MUTED, marginBottom: 48, fontSize: 14 }}>Five steps. No app downloads. No exchange accounts.</p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 8, alignItems: "start" }}>
           {[
-            { n: "1", title: "Buy Voucher", desc: "Purchase a Pesa Ya Siri voucher from local vendors.", icon: "🏪" },
-            { n: "2", title: "Redeem on WhatsApp", desc: "Scratch the card and send the code on WhatsApp.", icon: "💬" },
-            { n: "3", title: "Receive ZEC", desc: "ZEC is credited to your wallet instantly and privately.", icon: "⚡" },
-            { n: "4", title: "Send Privately", desc: "Send ZEC to anyone on Pesa Ya Siri instantly.", icon: "🔐" },
-            { n: "5", title: "Buy Airtime", desc: "Use your ZEC balance to buy airtime for any network.", icon: "📱" },
+            { title: "Buy Voucher", desc: "Purchase a Pesa Ya Siri voucher from local vendors.", icon: "🏪" },
+            { title: "Redeem on WhatsApp", desc: "Scratch the card and send the code on WhatsApp.", icon: "💬" },
+            { title: "Receive ZEC", desc: "ZEC is credited to your wallet instantly and privately.", icon: "⚡" },
+            { title: "Send Privately", desc: "Send ZEC to anyone on Pesa Ya Siri instantly.", icon: "🔐" },
+            { title: "Buy Airtime", desc: "Use your ZEC balance to buy airtime for any network.", icon: "📱" },
           ].map((s, i) => (
-            <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative" }}>
-              {i < 4 && <div style={{ position: "absolute", top: 20, left: "60%", width: "80%", height: 1, background: `linear-gradient(90deg, ${GOLD}44, transparent)`, zIndex: 0 }} />}
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: CARD, border: `2px solid ${GOLD}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, marginBottom: 12, position: "relative", zIndex: 1 }}>{s.icon}</div>
+            <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+              <div style={{ width: 44, height: 44, borderRadius: "50%", background: CARD, border: "2px solid " + GOLD, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, marginBottom: 12 }}>{s.icon}</div>
               <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 6, color: GREEN }}>{s.title}</div>
               <div style={{ color: MUTED, fontSize: 11, lineHeight: 1.5 }}>{s.desc}</div>
             </div>
@@ -269,24 +271,24 @@ export default function PesaYaSiriLanding() {
       </section>
 
       {/* LIVE DEMO */}
-      <section id="demo" style={{ background: CARD, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`, padding: "80px 32px" }}>
+      <section id="demo" style={{ background: CARD, borderTop: "1px solid " + BORDER, borderBottom: "1px solid " + BORDER, padding: "80px 32px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
           <div>
             <div style={{ color: GREEN, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>TRY IT</div>
             <h2 style={{ fontSize: 36, fontWeight: 800, marginBottom: 16, lineHeight: 1.2 }}>Live Demo</h2>
             <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>Experience Pesa Ya Siri in action. Try common commands and see how simple private payments can be.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {["CREATE", "BALANCE", "SEND 0712345678 0.1", "REDEEM A1B2C3D4", "BUY AIRTIME", "HELP"].map(cmd => (
+              {[
+                { cmd: "CREATE", desc: "Create a new wallet" },
+                { cmd: "BALANCE", desc: "Check your balance" },
+                { cmd: "SEND 0712345678 0.2", desc: "Send ZEC privately" },
+                { cmd: "REDEEM A1B2C3D4", desc: "Redeem a voucher" },
+                { cmd: "BUY AIRTIME", desc: "Buy mobile airtime" },
+                { cmd: "HELP", desc: "Show all commands" },
+              ].map(({ cmd, desc }) => (
                 <div key={cmd} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <code style={{ background: DARK, border: `1px solid ${BORDER}`, borderRadius: 6, padding: "3px 10px", fontSize: 12, color: GREEN, fontFamily: "monospace" }}>{cmd}</code>
-                  <span style={{ color: MUTED, fontSize: 12 }}>
-                    {cmd === "CREATE" && "— Create a new wallet"}
-                    {cmd === "BALANCE" && "— Check your balance"}
-                    {cmd.startsWith("SEND") && "— Send ZEC privately"}
-                    {cmd.startsWith("REDEEM") && "— Redeem voucher"}
-                    {cmd === "BUY AIRTIME" && "— Buy mobile airtime"}
-                    {cmd === "HELP" && "— Show this menu"}
-                  </span>
+                  <code style={{ background: DARK, border: "1px solid " + BORDER, borderRadius: 6, padding: "3px 10px", fontSize: 12, color: GREEN, fontFamily: "monospace" }}>{cmd}</code>
+                  <span style={{ color: MUTED, fontSize: 12 }}>— {desc}</span>
                 </div>
               ))}
             </div>
@@ -295,10 +297,10 @@ export default function PesaYaSiriLanding() {
         </div>
       </section>
 
-      {/* ARCHITECTURE */}
-      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 32px" }}>
+      {/* ROADMAP */}
+      <section id="roadmap" style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 32px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 28 }}>
+          <div style={{ background: CARD, border: "1px solid " + BORDER, borderRadius: 14, padding: 28 }}>
             <div style={{ fontSize: 24, marginBottom: 12 }}>🔗</div>
             <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>Architecture</div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
@@ -309,24 +311,24 @@ export default function PesaYaSiriLanding() {
             <div style={{ marginTop: 12, color: MUTED, fontSize: 12, lineHeight: 1.6 }}>Powered by lightwalletd and ZCash Ironwood shielded transactions.</div>
             <div style={{ marginTop: 16, display: "flex", gap: 8, flexWrap: "wrap" }}>
               {["Vodacom", "Airtel", "Yas", "Holotel"].map(v => (
-                <span key={v} style={{ background: DARK, border: `1px solid ${BORDER}`, borderRadius: 6, padding: "2px 8px", fontSize: 11, color: MUTED }}>{v}</span>
+                <span key={v} style={{ background: DARK, border: "1px solid " + BORDER, borderRadius: 6, padding: "2px 8px", fontSize: 11, color: MUTED }}>{v}</span>
               ))}
             </div>
           </div>
-          <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 28, textAlign: "center" }}>
+          <div style={{ background: CARD, border: "1px solid " + BORDER, borderRadius: 14, padding: 28, textAlign: "center" }}>
             <div style={{ fontSize: 48, fontWeight: 900, color: GREEN, marginBottom: 4 }}>100%</div>
             <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>Open Source</div>
             <div style={{ color: MUTED, fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>Transparent. Auditable. Community driven. Because privacy belongs to everyone.</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <a href="https://github.com/clemencedouglas/pesa-ya-siri" target="_blank" rel="noreferrer" style={{ background: DARK, border: `1px solid ${BORDER}`, color: TEXT, borderRadius: 8, padding: "8px 16px", fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+              <a href={GITHUB} target="_blank" rel="noreferrer" style={{ background: DARK, border: "1px solid " + BORDER, color: TEXT, borderRadius: 8, padding: "8px 16px", fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
                 <GITHUB_ICON /> View on GitHub
               </a>
-              <a href="https://web-production-fe8ba0.up.railway.app/health" target="_blank" rel="noreferrer" style={{ background: DARK, border: `1px solid ${BORDER}`, color: TEXT, borderRadius: 8, padding: "8px 16px", fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-                📄 Read Documentation
+              <a href={GITHUB + "#readme"} target="_blank" rel="noreferrer" style={{ background: DARK, border: "1px solid " + BORDER, color: TEXT, borderRadius: 8, padding: "8px 16px", fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+                Read Documentation
               </a>
             </div>
           </div>
-          <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 28 }}>
+          <div style={{ background: CARD, border: "1px solid " + BORDER, borderRadius: 14, padding: 28 }}>
             <div style={{ fontSize: 24, marginBottom: 12 }}>🗺</div>
             <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 16 }}>Roadmap</div>
             {[
@@ -348,36 +350,38 @@ export default function PesaYaSiriLanding() {
         </div>
       </section>
 
-      {/* BUILT FOR */}
-      <section style={{ background: CARD, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`, padding: "60px 32px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+      {/* FAQ */}
+      <section id="faq" style={{ background: CARD, borderTop: "1px solid " + BORDER, borderBottom: "1px solid " + BORDER, padding: "80px 32px" }}>
+        <div style={{ maxWidth: 700, margin: "0 auto" }}>
+          <h2 style={{ textAlign: "center", fontSize: 28, fontWeight: 700, marginBottom: 40 }}>Frequently Asked Questions</h2>
           {[
-            { icon: "⚡", title: "Powered by ZCash", desc: "Built on ZCash for strong privacy guarantees and financial freedom.", link: "Learn more about ZCash →" },
-            { icon: "🇹🇿", title: "Built for Tanzania", desc: "Local currency, local vendors, local support. Built with the Tanzanian community in mind.", link: "Learn more →" },
-            { icon: "📈", title: "Built to Scale", desc: "Designed to onboard millions with reliable infrastructure and real-world partnerships.", link: "See roadmap →" },
-          ].map((b, i) => (
-            <div key={i} style={{ background: DARK, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 24 }}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>{b.icon}</div>
-              <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{b.title}</div>
-              <div style={{ color: MUTED, fontSize: 13, lineHeight: 1.6, marginBottom: 12 }}>{b.desc}</div>
-              <a href="#" style={{ color: GREEN, fontSize: 12, textDecoration: "none" }}>{b.link}</a>
+            { q: "Do I need to download an app?", a: "No. Pesa Ya Siri works entirely through WhatsApp. If you have WhatsApp, you are ready." },
+            { q: "How do I get ZEC?", a: "Buy a Pesa Ya Siri recharge card from a local vendor, scratch it, and send the code on WhatsApp. ZEC is credited instantly." },
+            { q: "Is my transaction history private?", a: "Yes. Every transaction uses ZCash shielded addresses, which encrypt the sender, receiver, and amount on the blockchain." },
+            { q: "Which networks can I buy airtime for?", a: "Vodacom, Airtel, Yas, and Holotel are supported in the pilot. More networks will be added." },
+            { q: "When is the pilot launching?", a: "The pilot is launching in Dar es Salaam soon. Click Join Pilot to be notified." },
+          ].map((item, i) => (
+            <div key={i} style={{ borderBottom: "1px solid " + BORDER, padding: "20px 0" }}>
+              <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8 }}>{item.q}</div>
+              <div style={{ color: MUTED, fontSize: 13, lineHeight: 1.7 }}>{item.a}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: `1px solid ${BORDER}`, padding: "32px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+      <footer style={{ borderTop: "1px solid " + BORDER, padding: "32px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 24, height: 24, borderRadius: 6, background: `linear-gradient(135deg, ${GOLD}, #F4C842)`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 12, color: "#000" }}>P</div>
+          <div style={{ width: 24, height: 24, borderRadius: 6, background: "linear-gradient(135deg, #F4A800, #F4C842)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 12, color: "#000" }}>P</div>
           <div style={{ fontWeight: 700, fontSize: 13 }}>PESA YA SIRI</div>
-          <span style={{ color: MUTED, fontSize: 12 }}>© 2025 Pesa Ya Siri. All rights reserved.</span>
+          <span style={{ color: MUTED, fontSize: 12 }}>2025 Pesa Ya Siri. All rights reserved.</span>
         </div>
-        <div style={{ display: "flex", gap: 20 }}>
-          {["Docs", "FAQ", "Privacy", "Contact"].map(l => (
-            <a key={l} href="#" style={{ color: MUTED, fontSize: 12, textDecoration: "none" }}>{l}</a>
-          ))}
-          <a href="https://github.com/clemencedouglas/pesa-ya-siri" target="_blank" rel="noreferrer" style={{ color: MUTED }}><GITHUB_ICON /></a>
+        <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+          <a href={GITHUB + "#readme"} target="_blank" rel="noreferrer" style={{ color: MUTED, fontSize: 12, textDecoration: "none" }}>Docs</a>
+          <a href="#faq" style={{ color: MUTED, fontSize: 12, textDecoration: "none" }}>FAQ</a>
+          <a href="#" style={{ color: MUTED, fontSize: 12, textDecoration: "none" }}>Privacy</a>
+          <a href="mailto:contact@pesayasiri.com" style={{ color: MUTED, fontSize: 12, textDecoration: "none" }}>Contact</a>
+          <a href={GITHUB} target="_blank" rel="noreferrer" style={{ color: MUTED }}><GITHUB_ICON /></a>
         </div>
       </footer>
     </div>
