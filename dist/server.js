@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 3000;
 const start = async () => {
     await (0, connect_1.connectDB)();
     app_1.default.listen(PORT, () => {
-        console.log(`🔐 Pesa Ya Siri is running`);
-        console.log(`👉 http://localhost:${PORT}/health`);
+        console.log('Pesa Ya Siri is running');
+        console.log('Listening on port ' + PORT);
     });
 };
 start();
