@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const RAILWAY_MONGO = 'mongodb://mongo:SKBckMpRPeXWIoWcvEjLqIPrmOFWrCAo@mongodb.railway.internal:27017/pesayasiri?authSource=admin';
+const RAILWAY_MONGO = 'mongodb://mongo:hvUPBmlwMhiSZryPAgiDkdaFSfAmLSpB@mongodb.railway.internal:27017/pesayasiri?authSource=admin';
 
 export const connectDB = async (): Promise<void> => {
   try {
