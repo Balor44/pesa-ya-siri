@@ -2,7 +2,7 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "npm install && node_modules/typescript/bin/tsc"
+    "buildCommand": "npm install && npx --yes typescript@6.0.3 tsc"
   },
   "deploy": {
     "startCommand": "node dist/server.js",
