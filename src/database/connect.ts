@@ -4,15 +4,12 @@ const RAILWAY_MONGO = 'mongodb://mongo:SKBckMpRPeXWIoWcvEjLqIPrmOFWrCAo@mongodb.
 
 export const connectDB = async (): Promise<void> => {
   try {
-    const uri = process.env.DATABASE_URL || 
-                process.env.MONGO_URL || 
-                process.env.MONGODB_URI || 
-                RAILWAY_MONGO;
-    
+    const uri = process.env.DATABASE_URL || process.env.MONGO_URL || process.env.MONGODB_URI || RAILWAY_MONGO;
+
     await mongoose.connect(uri);
-    console.log('✅ MongoDB connected to:', uri.split('@')[1]);
+    console.log('MongoDB connected to:', uri.split('@')[1]);
   } catch (error) {
-    console.error('❌ MongoDB failed to connect:', error);
-    console.log('⚠️  Running without database — data will not persist');
+    console.error('MongoDB failed to connect:', error);
+    console.log('Running without database - data will not persist');
   }
 };
