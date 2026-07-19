@@ -50,6 +50,24 @@ export const ChatbotService = {
       return 'Topped up! ' + card.amount + ' ZEC added. Balance: ' + user.balance.toFixed(4) + ' ZEC';
     }
 
+    if (msg.startsWith('BUY AIRTIME')) {
+  const parts = msg.split(' ');
+  if (parts.length < 4) return 'Usage: BUY AIRTIME [network] [phone] [amount]\nExample: BUY AIRTIME VODACOM 0712345678 5000';
+  if (!user) return 'No wallet. Send CREATE to register first.';
+  const network = parts[2];
+  const targetPhone = parts[3];
+  const amount = parseFloat(parts[4]);
+  if (isNaN(amount) || amount <= 0) return 'Invalid amount.';
+  return 'Processing airtime purchase... Use the API endpoint /api/buy-airtime to complete this for now.';
+}
+
+if (msg.startsWith('BUY DSTV') || msg.startsWith('BUY GOTV')) {
+  const parts = msg.split(' ');
+  if (parts.length < 4) return 'Usage: BUY [DSTV/GOTV] [smartcard] [amount]\nExample: BUY DSTV 1234567890 15000';
+  if (!user) return 'No wallet. Send CREATE to register first.';
+  return 'Processing cable payment... Use the API endpoint /api/pay-cable to complete this for now.';
+}
+
     if (msg === 'HELP') {
       return [
         'Pesa Ya Siri commands:',
@@ -63,4 +81,6 @@ export const ChatbotService = {
 
     return 'Unknown command. Send HELP to see all options.';
   },
+
+
 };
