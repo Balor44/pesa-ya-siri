@@ -2,7 +2,16 @@ import { Request, Response } from 'express';
 import { UserModel } from '../models/User';
 import { TransactionModel } from '../models/Transaction';
 import { BillPayService } from '../services/billpay.service';
-import { convertTZStoZEC } from '../utils/price';
+import { getWalletService } from '../wallet';
+import { StellarService } from '../wallet/stellar.service';
+
+// Simple TZS-per-unit rate for now — replace with a live XLM/TZS price feed later,
+// the same way convertTZStoZEC worked for ZCash.
+const XLM_TO_TZS_RATE = 300; // placeholder rate, update with live price feed later
+
+function tzsToXlm(tzsAmount: number): number {
+  return tzsAmount / XLM_TO_TZS_RATE;
+}
 
 export const buyAirtime = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -16,9 +25,13 @@ export const buyAirtime = async (req: Request, res: Response): Promise<void> => 
     const user = await UserModel.findOne({ phone });
     if (!user) { res.status(404).json({ error: 'User not found' }); return; }
 
-    const requiredZec = await convertTZStoZEC(amount);
-    if (user.balance < requiredZec) {
-      res.status(400).json({ error: 'Insufficient balance. Need ' + requiredZec.toFixed(4) + ' ZEC' });
+    const service = getWalletService(user.chain);
+    const liveBalance = await service.getBalance(user.wallet);
+
+    const requiredAmount = user.chain === 'stellar' ? tzsToXlm(amount) : amount; // XLM or native ZEC-equivalent
+
+    if (liveBalance < requiredAmount) {
+      res.status(400).json({ error: 'Insufficient balance. Need ' + requiredAmount.toFixed(4) + ' ' + (user.chain === 'stellar' ? 'XLM' : 'ZEC') });
       return;
     }
 
@@ -28,23 +41,31 @@ export const buyAirtime = async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
-    user.balance -= requiredZec;
-    await user.save();
+    let txid: string;
+    if (user.chain === 'stellar') {
+      if (!user.secret) { res.status(400).json({ error: 'Wallet missing secret key' }); return; }
+      // Operator wallet address should collect airtime payments — placeholder receiving address for now
+      const OPERATOR_WALLET = 'GDT5HAB7KDM7WBWVOQJSBT7ACXA43EC5WFJSUB5F74XM57IR5ZKRWG6A';
+      txid = await StellarService.sendXLM(user.secret, OPERATOR_WALLET, requiredAmount);
+    } else {
+      txid = result.reference;
+    }
 
     await TransactionModel.create({
-      from: phone, to: 'AIRTIME-' + network, amount: requiredZec, txid: result.reference, type: 'send'
+      from: phone, to: 'AIRTIME-' + network, amount: requiredAmount, txid, type: 'send'
     });
 
     res.json({
       status: 'success',
       reference: result.reference,
       message: result.message,
-      deducted: requiredZec.toFixed(4) + ' ZEC',
-      newBalance: user.balance.toFixed(4) + ' ZEC',
+      deducted: requiredAmount.toFixed(4) + ' ' + (user.chain === 'stellar' ? 'XLM' : 'ZEC'),
+      txid,
     });
 
-  } catch (error) {
-    res.status(500).json({ error: 'Server error' });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).json({ error: error.message || 'Server error' });
   }
 };
 
@@ -60,9 +81,13 @@ export const payCable = async (req: Request, res: Response): Promise<void> => {
     const user = await UserModel.findOne({ phone });
     if (!user) { res.status(404).json({ error: 'User not found' }); return; }
 
-    const requiredZec = await convertTZStoZEC(amount);
-    if (user.balance < requiredZec) {
-      res.status(400).json({ error: 'Insufficient balance. Need ' + requiredZec.toFixed(4) + ' ZEC' });
+    const service = getWalletService(user.chain);
+    const liveBalance = await service.getBalance(user.wallet);
+
+    const requiredAmount = user.chain === 'stellar' ? tzsToXlm(amount) : amount;
+
+    if (liveBalance < requiredAmount) {
+      res.status(400).json({ error: 'Insufficient balance. Need ' + requiredAmount.toFixed(4) + ' ' + (user.chain === 'stellar' ? 'XLM' : 'ZEC') });
       return;
     }
 
@@ -72,22 +97,30 @@ export const payCable = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    user.balance -= requiredZec;
-    await user.save();
+    let txid: string;
+    if (user.chain === 'stellar') {
+      if (!user.secret) { res.status(400).json({ error: 'Wallet missing secret key' }); return; }
+      const OPERATOR_WALLET = 'GDT5HAB7KDM7WBWVOQJSBT7ACXA43EC5WFJSUB5F74XM57IR5ZKRWG6A';
+      txid = await StellarService.sendXLM(user.secret, OPERATOR_WALLET, requiredAmount);
+    } else {
+      txid = result.reference;
+    }
 
     await TransactionModel.create({
-      from: phone, to: 'CABLE-' + provider, amount: requiredZec, txid: result.reference, type: 'send'
+      from: phone, to: 'CABLE-' + provider, amount: requiredAmount, txid, type: 'send'
     });
 
     res.json({
       status: 'success',
       reference: result.reference,
       message: result.message,
-      deducted: requiredZec.toFixed(4) + ' ZEC',
-      newBalance: user.balance.toFixed(4) + ' ZEC',
+      deducted: requiredAmount.toFixed(4) + ' ' + (user.chain === 'stellar' ? 'XLM' : 'ZEC'),
+      txid,
     });
 
-  } catch (error) {
-    res.status(500).json({ error: 'Server error' });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).json({ error: error.message || 'Server error' });
   }
 };
+
